@@ -1,0 +1,10 @@
+---
+// src/components/Button.astro
+const { href = "#", variant = "primary", children } = Astro.props;
+const base = "inline-flex items-center gap-2 px-4 py-2 rounded-md font-medium focus:outline-none focus-visible:ring";
+const variants = {
+  primary: `${base} bg-ink text-white`,
+  ghost: `${base} border border-support2 bg-white`
+};
+---
+<a class={variants[variant]} href={href}><slot /></a>

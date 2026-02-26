@@ -1,0 +1,63 @@
+---
+// src/layouts/BaseLayout.astro
+const { title = "Kareena Salim Lakhani", description = "Robotics & AI | SLAM, VO, ROS, LLM tooling" } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/src/styles/main.css">
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content="/images/og-image.png" />
+  </head>
+  <body class="bg-bg text-charcoal">
+    <a class="sr-only focus:not-sr-only" href="#main">Skip to content</a>
+    <header>
+      <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+        <a href="/" class="flex items-center gap-3" aria-label="Home">
+          <div class="w-10 h-10 rounded-md bg-primary flex items-center justify-center text-ink font-semibold">KSL</div>
+          <span class="font-display text-lg">Kareena Salim Lakhani</span>
+        </a>
+        <nav class="hidden md:flex gap-6 items-center text-sm">
+          <a href="/" class="hover:underline">Home</a>
+          <a href="/about" class="hover:underline">About</a>
+          <a href="/projects" class="hover:underline">Projects</a>
+          <a href="/publications" class="hover:underline">Publications</a>
+          <a href="/resume" class="hover:underline">Resume</a>
+          <a href="/contact" class="hover:underline">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="max-w-6xl mx-auto px-6">
+      <slot />
+    </main>
+
+    <footer class="mt-16 border-t border-support2">
+      <div class="max-w-6xl mx-auto px-6 py-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-md bg-primary flex items-center justify-center text-ink font-semibold">KSL</div>
+            <div>
+              <div class="font-semibold">Kareena Salim Lakhani</div>
+              <div class="text-sm text-support2">MS Robotics & Autonomous Systems (AI) — Arizona State University</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <a class="text-sm hover:underline" href="mailto:klakhan5@asu.edu">Email</a>
+          <a class="text-sm hover:underline" href="https://www.linkedin.com/in/kareenalakhani" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="/resume" class="px-3 py-2 rounded-md border border-support2 text-sm">Resume</a>
+        </div>
+      </div>
+      <div class="border-t border-support2 text-xs text-support2 text-center py-3">Built with Astro • Deployed on Netlify</div>
+    </footer>
+  </body>
+</html>

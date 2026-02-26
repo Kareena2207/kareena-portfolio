@@ -1,0 +1,26 @@
+---
+// src/pages/publications.astro
+import BaseLayout from "../layouts/BaseLayout.astro";
+import fs from "fs";
+import { glob } from "glob";
+const pubFiles = await glob("src/content/publications/*.md");
+const pubs = pubFiles.map(p => {
+  const name = p.split("/").pop().replace(".md", "");
+  return { name, file: p };
+});
+---
+<BaseLayout title="Publications — Kareena Salim Lakhani">
+  <section class="py-12">
+    <h1 class="font-display text-2xl">Publications</h1>
+    <p class="mt-2 text-support2">Bibtex-style entries with links and a toggle to show BibTeX.</p>
+
+    <div class="mt-6 space-y-4">
+      {pubs.map(p => (
+        <div class="bg-white p-6 rounded-md shadow-soft">
+          <div class="font-semibold">{p.name.replace(/-/g," ")}</div>
+          <div class="mt-2 text-support2">Open entry to view details</div>
+        </div>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

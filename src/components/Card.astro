@@ -1,0 +1,11 @@
+---
+// src/components/Card.astro
+const { title, href, tags = [] } = Astro.props;
+---
+<article class="bg-white p-6 rounded-md shadow-soft hover:translate-y-[-2px] transition-transform">
+  <h3 class="text-lg font-semibold"><a href={href} class="hover:underline">{title}</a></h3>
+  <div class="mt-3 text-sm text-support2"><slot /></div>
+  <div class="mt-4 flex gap-2">
+    {tags.map(t => <span class="px-2 py-1 text-xs bg-primary2 rounded-md">{t}</span>)}
+  </div>
+</article>
