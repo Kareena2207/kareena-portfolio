@@ -1,6 +1,10 @@
 ---
 // src/layouts/BaseLayout.astro
+import "../styles/main.css";
+
 const { title = "Kareena Salim Lakhani", description = "Robotics & AI | SLAM, VO, ROS, LLM tooling" } = Astro.props;
+---
+
 ---
 <!doctype html>
 <html lang="en">
@@ -11,7 +15,6 @@ const { title = "Kareena Salim Lakhani", description = "Robotics & AI | SLAM, VO
     <meta name="description" content={description} />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/src/styles/main.css">
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content="/images/og-image.png" />
