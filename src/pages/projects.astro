@@ -1,26 +1,34 @@
 ---
 // src/pages/projects.astro
 import BaseLayout from "../layouts/BaseLayout.astro";
-import fs from "fs";
-import { glob } from "glob";
-const projectFiles = await glob("src/content/projects/*.mdx");
-const projects = projectFiles.map(p => {
-  const slug = p.split("/").pop().replace(".mdx", "");
-  return { slug, file: p };
-});
+import Card from "../components/Card.astro";
+import { getCollection } from "astro:content";
+
+const projects = await getCollection("projects");
+const featured = projects.filter(p => p.data.featured);
 ---
 <BaseLayout title="Projects — Kareena Salim Lakhani">
   <section class="py-12">
     <h1 class="font-display text-2xl">Projects</h1>
-    <p class="mt-2 text-support2">Featured and full list of research & systems projects.</p>
+    <p class="mt-2 text-support2">Featured work and full project list with demos.</p>
 
-    <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+    <h2 class="mt-8 text-xl font-semibold">Featured</h2>
+    <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-6">
+      {featured.map(p => (
+        <Card title={p.data.title} href={`/projects/${p.slug}`} tags={p.data.tags ?? []}>
+          {p.data.summary}
+        </Card>
+      ))}
+    </div>
+
+    <h2 class="mt-10 text-xl font-semibold">All projects</h2>
+    <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-6">
       {projects.map(p => (
-        <article class="bg-white p-5 rounded-md shadow-soft">
-          <h3 class="font-semibold"><a href={`/projects/${p.slug}`} class="hover:underline">{p.slug.replace(/-/g, " ")}</a></h3>
-          <p class="text-sm text-support2 mt-2">Open project page for details & demos</p>
-        </article>
+        <Card title={p.data.title} href={`/projects/${p.slug}`} tags={p.data.tags ?? []}>
+          {p.data.summary}
+        </Card>
       ))}
     </div>
   </section>
 </BaseLayout>
+

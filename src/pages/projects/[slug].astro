@@ -1,24 +1,43 @@
 ---
-// src/pages/projects/[slug].astro
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
-const { slug } = Astro.params;
-const project = await getCollection("projects").then(c => c.find(x => x.slug === slug));
----
-<BaseLayout title={`${project?.data.title || slug} — Projects`}>
-  <section class="py-12">
-    <h1 class="font-display text-2xl">{project?.data.title}</h1>
-    <div class="mt-4 text-support2">{project?.data.summary}</div>
 
-    <article class="mt-6 bg-white p-6 rounded-md shadow-soft">
-      <h2 class="font-semibold">Approach</h2>
-      <div class="mt-2">
-        <slot name="content">
-          <div innerHTML={project?.body} />
-        </slot>
+export async function getStaticPaths() {
+  const projects = await getCollection("projects");
+  return projects.map((p) => ({
+    params: { slug: p.slug },
+    props: { project: p },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await project.render();
+---
+<BaseLayout title={`${project.data.title} — Projects`} description={project.data.summary}>
+  <section class="py-12">
+    <h1 class="font-display text-2xl">{project.data.title}</h1>
+    <p class="mt-2 text-support2">{project.data.summary}</p>
+
+    <div class="mt-4 flex flex-wrap gap-2">
+      {project.data.tags.map((t) => (
+        <span class="px-2 py-1 text-xs bg-primary2 rounded-full">{t}</span>
+      ))}
+    </div>
+
+    <div class="mt-8 bg-white p-6 rounded-md shadow-soft prose max-w-none">
+      <Content />
+    </div>
+
+    {project.data.links?.demo && (
+      <div class="mt-8 bg-white p-6 rounded-md shadow-soft">
+        <h2 class="font-semibold">Demo</h2>
+        <p class="mt-2 text-support2">
+          <a class="text-ink hover:underline" href={project.data.links.demo} target="_blank" rel="noopener">
+            View demo
+          </a>
+        </p>
       </div>
-      <h3 class="mt-4 font-semibold">Tech stack</h3>
-      <div class="mt-2">{project?.data.stack?.join(", ")}</div>
-    </article>
+    )}
   </section>
 </BaseLayout>
+
