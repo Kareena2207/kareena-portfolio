@@ -1,29 +1,21 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-/* Base document font smoothing and body */
 :root {
   color-scheme: light;
 }
 
 html, body {
-  background: #F7F6F5;
+  background: #DBC5C2;
   color: #2E2A28;
   font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
 }
 
-/* small utility for rounded rectangle headshot */
-.headshot-rounded {
-  border-radius: 10px;
-  width: 160px;
-  height: 160px;
-  object-fit: cover;
-  box-shadow: 0 6px 18px rgba(46,42,40,0.06);
+a {
+  color: #1F2A44;
+  text-decoration: none;
 }
 
-/* focus visible */
-:focus-visible {
-  outline: 3px solid rgba(31,42,68,0.12);
-  outline-offset: 3px;
+a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }

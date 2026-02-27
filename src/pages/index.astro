@@ -6,14 +6,14 @@ import Card from "../components/Card.astro";
 <BaseLayout title="Kareena Salim Lakhani — Robotics & AI">
   <section class="py-12 flex flex-col md:flex-row gap-8 items-start">
     <div class="w-full md:w-1/2">
-      <img src="/images/headshot.jpg" alt="Kareena Salim Lakhani" class="headshot-rounded">
+      <img src={`${import.meta.env.BASE_URL}images/headshot.jpg`} alt="Kareena Salim Lakhani" class="headshot-rounded">
     </div>
     <div class="w-full md:w-1/2">
       <h1 class="font-display text-3xl">Kareena Salim Lakhani</h1>
       <p class="mt-4 text-lg">Robotics Engineer & AI researcher — MS Robotics & Autonomous Systems (AI), Arizona State University. I build real-time perception systems, SLAM/VO pipelines, ROS-based robot software, and tooling for LLM evaluation and post-training loops.</p>
       <div class="mt-6 flex gap-3">
         <a class="inline-block bg-ink text-white px-4 py-2 rounded-md" href="/resume">Download Resume</a>
-        <a class="inline-block px-4 py-2 rounded-md border border-support2" href="/projects">View Projects</a>
+        <a class="inline-block px-4 py-2 rounded-md bg-[#E98C6A] text-white" href="/projects">View Projects</a>
         <a class="inline-block px-4 py-2 rounded-md border border-support2" href="/contact">Contact</a>
       </div>
       <div class="mt-8 grid grid-cols-2 gap-4">
